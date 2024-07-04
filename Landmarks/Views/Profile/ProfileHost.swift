@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ProfileHost: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(ProfileModel.self) var profileModel
     @State private var draftProfile = Profile.default
-    @State private var profile = Profile.default
     @State private var isEditing = false
     
     var body: some View {
@@ -19,7 +19,7 @@ struct ProfileHost: View {
             if isEditing {
                 EditProfile(profile: $draftProfile)
             } else {
-                ProfileSummary(profile: profile)
+                ProfileSummary(profile: profileModel.profile)
             }
         }
         .padding([.leading, .trailing], 20)
@@ -28,7 +28,7 @@ struct ProfileHost: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 if isEditing {
                     Button(action: {
-                        draftProfile = profile
+                        draftProfile = profileModel.profile
                         isEditing = false
                     }) {
                         HStack {
@@ -60,7 +60,7 @@ struct ProfileHost: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if isEditing {
                     Button(action: {
-                        profile = draftProfile
+                        profileModel.profile = draftProfile
                         isEditing = false
                     }) {
                         Text("Save")
@@ -68,7 +68,7 @@ struct ProfileHost: View {
                     }
                 } else {
                     Button(action: {
-                        draftProfile = profile
+                        draftProfile = profileModel.profile
                         isEditing = true
                     }) {
                         Text("Edit")
@@ -83,4 +83,5 @@ struct ProfileHost: View {
 #Preview {
     ProfileHost()
         .environment(ModelData())
+        .environment(ProfileModel())
 }
