@@ -11,18 +11,18 @@ import SwiftUI
 struct ProfileHost: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(ProfileModel.self) var profileModel
+    
     @State private var draftProfile = Profile.default
     @State private var isEditing = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack() {
             if isEditing {
                 EditProfile(profile: $draftProfile)
             } else {
                 ProfileSummary(profile: profileModel.profile)
             }
         }
-        .padding([.leading, .trailing], 20)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
