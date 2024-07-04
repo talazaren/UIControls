@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct ProfileSummary: View {
-    @Environment(ModelData.self) var modelData
     var profile: Profile
     
     var body: some View {
@@ -21,7 +20,7 @@ struct ProfileSummary: View {
             Text("Seasonal Photos: \(profile.seasonalPhoto.rawValue)")
             Text("Goal Date: ") + Text(profile.goalDate, style: .date)
             Divider()
-            Text("Complted Badges")
+            Text("Completed Badges")
                 .font(.headline)
             ScrollView {
                 HStack {
