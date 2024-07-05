@@ -77,9 +77,6 @@ struct ProfileHost: View {
                 }
             }
         }
-        .onTapGesture {
-            hideKeyboard()
-        }
     }
 }
 
