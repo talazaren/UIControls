@@ -17,16 +17,18 @@ struct ProfileHost: View {
     
     var body: some View {
         VStack() {
-            if isEditing {
+            switch isEditing {
+            case true:
                 EditProfile(profile: $draftProfile)
-            } else {
+            default:
                 ProfileSummary(profile: profileModel.profile)
             }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                if isEditing {
+                switch isEditing {
+                case true:
                     Button(action: {
                         draftProfile = profileModel.profile
                         isEditing = false
@@ -41,7 +43,7 @@ struct ProfileHost: View {
                                 .font(.system(size: 18))
                         }
                     }
-                } else {
+                default:
                     Button(action: {
                         dismiss()
                     }) {
@@ -58,7 +60,8 @@ struct ProfileHost: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                if isEditing {
+                switch isEditing {
+                case true:
                     Button(action: {
                         profileModel.profile = draftProfile
                         isEditing = false
@@ -66,7 +69,7 @@ struct ProfileHost: View {
                         Text("Save")
                             .font(.system(size: 18))
                     }
-                } else {
+                default:
                     Button(action: {
                         draftProfile = profileModel.profile
                         isEditing = true
