@@ -27,3 +27,8 @@ struct Profile {
 extension Profile {
     static let `default` = Profile(username: "aapl")
 }
+
+@Observable
+class ProfileModel {
+    var profile = Profile.default
+}
